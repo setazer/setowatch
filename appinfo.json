@@ -1,0 +1,19 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "we.are@setazer.us",
+    "longName": "Setowatch",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "shortName": "Setowatch",
+    "uuid": "4b83a7fb-6ea9-4cb0-b427-cbaf5fad1777",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
