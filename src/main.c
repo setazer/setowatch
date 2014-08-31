@@ -3,7 +3,7 @@ Window *window;
 //Слои
 TextLayer *time_layer, *date_layer, *wday_layer;
 //Картинки блютуза и батареи
-GBitmap *bt_conn, *bt_disconn, *batt_low, *batt_charg;
+GBitmap *bt_disconn, *batt_low, *batt_charg;
 //Слои картинок
 BitmapLayer *bt_layer, *batt_layer;
 //Инвертер (инвертирует пиксели в заданной области)
@@ -31,7 +31,7 @@ static void batt_handler(BatteryChargeState state)
 static void bt_handler(bool connected)
 {
   if(connected == true){
-    bitmap_layer_set_bitmap(bt_layer, bt_conn);
+    bitmap_layer_set_bitmap(bt_layer, NULL);
   }
   else {
     bitmap_layer_set_bitmap(bt_layer, bt_disconn);
@@ -85,37 +85,33 @@ void window_load(Window *window)
 {
   //Инициализация ресурсов (шрифты/картинки блютуза/батареи)
   ResHandle font_handle42 = resource_get_handle(RESOURCE_ID_IMAGINE_42);
-  ResHandle fontv_handle42 = resource_get_handle(RESOURCE_ID_VISITOR_42);
-  bt_conn = gbitmap_create_with_resource(RESOURCE_ID_BT_CONNECTED);
+  ResHandle fontv_handle42 = resource_get_handle(RESOURCE_ID_VISITOR_52);
   bt_disconn = gbitmap_create_with_resource(RESOURCE_ID_BT_DISCONNECTED);
   batt_low = gbitmap_create_with_resource(RESOURCE_ID_BATTERY_LOW);
   batt_charg = gbitmap_create_with_resource(RESOURCE_ID_BATTERY_CHARGING);
   //Создание слоёв батареи и блютуза  
-  bt_layer = bitmap_layer_create(GRect(5,132,32,32));
-  batt_layer = bitmap_layer_create(GRect(107,132,32,32));
+  bt_layer = bitmap_layer_create(GRect(5,124,32,32));
+  batt_layer = bitmap_layer_create(GRect(107,124,32,32));
   //Слой времени
-    time_layer = text_layer_create(GRect(2, 6, 144, 162));
+    time_layer = text_layer_create(GRect(2, 0, 144, 162));
   text_layer_set_background_color(time_layer, GColorClear);
   text_layer_set_text_color(time_layer, GColorBlack);
   text_layer_set_text_alignment(time_layer, GTextAlignmentCenter);
   text_layer_set_font(time_layer,fonts_load_custom_font(font_handle42));
   //Слой даты  
-    date_layer = text_layer_create(GRect(2, 62, 144, 106));
+    date_layer = text_layer_create(GRect(2, 56, 144, 106));
   text_layer_set_background_color(date_layer, GColorClear);
   text_layer_set_text_color(date_layer, GColorBlack);
   text_layer_set_text_alignment(date_layer, GTextAlignmentCenter);
   text_layer_set_font(date_layer,fonts_load_custom_font(font_handle42));
   //Слой дня недели    
-    wday_layer = text_layer_create(GRect(2, 118, 144, 106));
+    wday_layer = text_layer_create(GRect(2, 100, 144, 106));
   text_layer_set_background_color(wday_layer, GColorClear);
   text_layer_set_text_color(wday_layer, GColorBlack);
   text_layer_set_text_alignment(wday_layer, GTextAlignmentCenter);
   text_layer_set_font(wday_layer,fonts_load_custom_font(fontv_handle42));
   //Начальное состояние блютуза
-  if(bluetooth_connection_service_peek()==true){
-    bitmap_layer_set_bitmap(bt_layer, bt_conn);
-  }
-  else {
+  if(bluetooth_connection_service_peek()==false){
     bitmap_layer_set_bitmap(bt_layer, bt_disconn);
   }
   //Начальное состояние батареи
@@ -147,7 +143,6 @@ void window_load(Window *window)
 void window_unload(Window *window)
 {
   //Освобождение памяти от ресурсов
-  gbitmap_destroy(bt_conn);
   gbitmap_destroy(bt_disconn);
   gbitmap_destroy(batt_low);
   gbitmap_destroy(batt_charg);

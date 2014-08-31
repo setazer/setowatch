@@ -9,11 +9,6 @@
     "resources": {
         "media": [
             {
-                "file": "images/connected-128.png",
-                "name": "BT_CONNECTED",
-                "type": "png"
-            },
-            {
                 "file": "images/disconnected-128.png",
                 "name": "BT_DISCONNECTED",
                 "type": "png"
@@ -31,7 +26,7 @@
             {
                 "characterRegex": "[\u0430-\u044f\u0410-\u042fa-zA-Z]",
                 "file": "fonts/Visitor_Rus.ttf",
-                "name": "VISITOR_42",
+                "name": "VISITOR_52",
                 "type": "font"
             },
             {
