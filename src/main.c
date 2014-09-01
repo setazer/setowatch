@@ -44,7 +44,7 @@ void tick_handler(struct tm *tick_time, TimeUnits units_changed)
 {
   //Форматирование буферов даты/времени
   strftime(timebuffer, sizeof("00:00"), "%H:%M", tick_time);
-  strftime(datebuffer, sizeof("00.00"), "%e.%m", tick_time);
+  strftime(datebuffer, sizeof("00.00"), "%d.%m", tick_time);
   //Вывод даты/времени
   text_layer_set_text(time_layer, timebuffer);
   text_layer_set_text(date_layer, datebuffer);
