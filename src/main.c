@@ -93,13 +93,13 @@ void window_load(Window *window)
   bt_layer = bitmap_layer_create(GRect(5,124,32,32));
   batt_layer = bitmap_layer_create(GRect(107,124,32,32));
   //Слой времени
-    time_layer = text_layer_create(GRect(2, 0, 144, 162));
+    time_layer = text_layer_create(GRect(2, 56, 144, 106));
   text_layer_set_background_color(time_layer, GColorClear);
   text_layer_set_text_color(time_layer, GColorBlack);
   text_layer_set_text_alignment(time_layer, GTextAlignmentCenter);
   text_layer_set_font(time_layer,fonts_load_custom_font(font_handle42));
   //Слой даты  
-    date_layer = text_layer_create(GRect(2, 56, 144, 106));
+    date_layer = text_layer_create(GRect(2, 0, 144, 162));
   text_layer_set_background_color(date_layer, GColorClear);
   text_layer_set_text_color(date_layer, GColorBlack);
   text_layer_set_text_alignment(date_layer, GTextAlignmentCenter);
