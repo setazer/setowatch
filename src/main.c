@@ -3,7 +3,7 @@ Window *window;
 //Слои
 TextLayer *time_layer, *date_layer, *wday_layer;
 //Картинки блютуза и батареи
-GBitmap *bt_disconn, *batt_low, *batt_charg;
+GBitmap *bt_disconn, *batt_low, *batt_charg, *batt_full;
 //Слои картинок
 BitmapLayer *bt_layer, *batt_layer;
 //Инвертер (инвертирует пиксели в заданной области)
@@ -17,6 +17,10 @@ static void batt_handler(BatteryChargeState state)
 {
  if ((state.is_charging == true)&&(state.charge_percent<100)){
     bitmap_layer_set_bitmap(batt_layer, batt_charg);
+  }
+  else if ((state.is_charging == true)&&(state.charge_percent == 100)){
+    bitmap_layer_set_bitmap(batt_layer, batt_full);
+    vibes_double_pulse();
   }
   else if (state.charge_percent<30){
       bitmap_layer_set_bitmap(batt_layer, batt_low);
@@ -73,8 +77,8 @@ void tick_handler(struct tm *tick_time, TimeUnits units_changed)
     text_layer_set_text(wday_layer,"СБ");
     break;
     };
-  //Ежечасная вибрация с 8:00 по 17:00  
-  if ((tick_time->tm_min==0) && (tick_time->tm_sec==0) && (tick_time->tm_hour>7) && (tick_time->tm_hour<18) )
+  //Уведомительная вибрация (начало раб дня, конец раб дня, обед, конец обеда, пора домой)  
+  if ((strcmp(timebuffer,"08:00")==0) ||(strcmp(timebuffer,"17:00")==0)||(strcmp(timebuffer,"11:25")==0)||(strcmp(timebuffer,"13:00")==0)||(strcmp(timebuffer,"16:48")==0))
     {
     vibes_double_pulse();
     }
@@ -89,6 +93,7 @@ void window_load(Window *window)
   bt_disconn = gbitmap_create_with_resource(RESOURCE_ID_BT_DISCONNECTED);
   batt_low = gbitmap_create_with_resource(RESOURCE_ID_BATTERY_LOW);
   batt_charg = gbitmap_create_with_resource(RESOURCE_ID_BATTERY_CHARGING);
+  batt_full = gbitmap_create_with_resource(RESOURCE_ID_BATTERY_CHARGED);
   //Создание слоёв батареи и блютуза  
   bt_layer = bitmap_layer_create(GRect(5,124,32,32));
   batt_layer = bitmap_layer_create(GRect(107,124,32,32));
@@ -146,6 +151,7 @@ void window_unload(Window *window)
   gbitmap_destroy(bt_disconn);
   gbitmap_destroy(batt_low);
   gbitmap_destroy(batt_charg);
+  gbitmap_destroy(batt_full);
   bitmap_layer_destroy(bt_layer);
   bitmap_layer_destroy(batt_layer);
   text_layer_destroy(time_layer);

@@ -9,6 +9,11 @@
     "resources": {
         "media": [
             {
+                "file": "images/charged-32.png",
+                "name": "BATTERY_CHARGED",
+                "type": "png"
+            },
+            {
                 "file": "images/disconnected-128.png",
                 "name": "BT_DISCONNECTED",
                 "type": "png"
