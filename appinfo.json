@@ -1,7 +1,10 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "KEY_BATTBAR": 1,
+        "KEY_LANG": 0
+    },
     "capabilities": [
-        ""
+        "configurable"
     ],
     "companyName": "SetazeR",
     "longName": "Setowatch",
@@ -31,7 +34,7 @@
             {
                 "characterRegex": "[\u0430-\u044f\u0410-\u042fa-zA-Z]",
                 "file": "fonts/Visitor_Rus.ttf",
-                "name": "VISITOR_52",
+                "name": "VISITOR_62",
                 "type": "font"
             },
             {
@@ -43,13 +46,13 @@
             {
                 "characterRegex": "[0-9:.]",
                 "file": "fonts/imagine.ttf",
-                "name": "IMAGINE_24",
+                "name": "IMAGINE_42",
                 "type": "font"
             },
             {
                 "characterRegex": "[0-9:.]",
                 "file": "fonts/imagine.ttf",
-                "name": "IMAGINE_42",
+                "name": "IMAGINE_24",
                 "type": "font"
             }
         ]
